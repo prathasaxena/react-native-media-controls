@@ -9,7 +9,7 @@ var React__default = _interopDefault(React);
 var reactNative = require('react-native');
 var RNSlider = _interopDefault(require('react-native-slider'));
 
-var containerBackgroundColor = "rgba(45, 59, 62, 0.4)";
+var containerBackgroundColor = "transparent";
 var playButtonBorderColor = "rgba(255,255,255,0.5)";
 var white = "#fff";
 var styles = /*#__PURE__*/reactNative.StyleSheet.create({
@@ -167,7 +167,8 @@ var Slider = function Slider(props) {
   var progress = props.progress,
       duration = props.duration,
       mainColor = props.mainColor,
-      onFullScreen = props.onFullScreen,
+    onFullScreen = props.onFullScreen,
+    showSlider = props.showSlider,
       onPause = props.onPause;
 
   var dragging = function dragging(value) {
@@ -187,7 +188,7 @@ var Slider = function Slider(props) {
     onPause();
   };
 
-  return React__default.createElement(reactNative.View, {
+  return Boolean(showSlider)?React__default.createElement(reactNative.View, {
     style: [styles.controlsRow, styles.progressContainer]
   }, React__default.createElement(reactNative.View, {
     style: styles.progressColumnContainer
@@ -213,7 +214,7 @@ var Slider = function Slider(props) {
     onPress: onFullScreen
   }, React__default.createElement(reactNative.Image, {
     source: fullScreenImage
-  })));
+  }))): null;
 };
 
 var Toolbar = function Toolbar(_ref) {
@@ -226,7 +227,8 @@ var MediaControls = function MediaControls(props) {
       duration = props.duration,
       _props$isLoading = props.isLoading,
       isLoading = _props$isLoading === void 0 ? false : _props$isLoading,
-      onFullScreen = props.onFullScreen,
+    onFullScreen = props.onFullScreen,
+    showSlider = props.showSlider,
       playerState = props.playerState,
       progress = props.progress,
       onReplayCallback = props.onReplay,
@@ -346,6 +348,7 @@ var MediaControls = function MediaControls(props) {
     duration: duration,
     mainColor: mainColor,
     onFullScreen: onFullScreen,
+    showSlider: showSlider,
     playerState: playerState,
     onSeek: onSeek,
     onSeeking: onSeeking,
